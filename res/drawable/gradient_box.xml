@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- android:shape="rectangle" 图片的类型  rectangle 矩形 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:shape="rectangle">
+    <!-- 
+    渐变的颜色
+    android:startColor="#ffffffff"  开始的颜色
+    android:endColor="#80ff00ff" 结束的颜色
+    android:angle="45" 这个数必须是45的倍数，这个是调整颜色渐变角度使用的
+     -->
+    <gradient
+        android:startColor="#ffffffff"
+        android:endColor="#80ff00ff"
+        android:angle="45"
+        />
+    <!-- 内间距的属性 -->
+    <padding
+        android:left="7dp"
+        android:top="7dp"
+        android:right="7dp"
+        android:bottom="7dp"
+        />
+    <!-- 这个是圆角属性 -->
+    <corners
+        android:radius="8dp"
+         />
+
+</shape>

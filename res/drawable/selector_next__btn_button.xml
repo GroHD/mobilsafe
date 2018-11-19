@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 在res 下drawable 的目录下创建一个button.xml文件 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- 按钮选中 -->
+    <item android:state_pressed="true" android:drawable="@drawable/function_greenbutton_pressed"></item>
+	<!-- 按钮获取到焦点:android:state_focused="true"
+		 平板点数,悬浮选中某一个应用的图片:android:state_hovered="true"
+		 -->
+		 <!--  默认的图片 -->
+	<item android:drawable="@drawable/function_greenbutton_normal"></item>
+</selector>

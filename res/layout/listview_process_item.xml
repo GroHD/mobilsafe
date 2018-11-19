@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <ImageView 
+        android:id="@+id/iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"
+        />
+<TextView 
+    android:id="@+id/tv_appName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/iv_icon"
+    android:textSize="15sp"
+    android:text="这是APPName的哈哈哈哈"
+    />
+<TextView 
+    android:id="@+id/tv_apppackage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@id/iv_icon"
+    android:layout_below="@id/tv_appName"
+    android:textSize="15sp"
+    android:text="这是APPPackage哈哈哈哈"
+    />
+<CheckBox 
+    android:id="@+id/cb_select"
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    />
+</RelativeLayout>

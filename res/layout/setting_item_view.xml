@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp" >
+
+        <TextView
+            android:id="@+id/tv_titleMes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_titleDes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_titleMes"
+            android:textColor="#a9a9a9"
+            android:textSize="15sp" />
+<!--  
+	android:clickable="false"  不可以被点击
+	android:focusable="false"   不响应触摸事件
+    android:focusableInTouchMode="false" 
+
+-->
+        <CheckBox
+            android:id="@+id/cb_autoUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_centerVertical="true" />
+
+        <View
+            android:paddingTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tv_titleDes"
+            android:background="#000"
+             >
+        </View>
+    </RelativeLayout>
+
+</RelativeLayout>

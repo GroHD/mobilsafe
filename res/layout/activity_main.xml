@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/new_bj"
+    android:orientation="vertical"
+    tools:context="com.itcasthd.mobilesafe.splashActivity.MainActivity" >
+	<!-- 
+			gravity  控件内部居中  
+			padding	内边距-->
+	<!-- 
+		将对应的属性抽取到样式中
+	 -->
+    <TextView
+        android:text="功能列表"
+        style="@style/TitleStyle" />
+    <!-- 滚动的文字
+    	android:ellipsize="marquee"   跑马灯效果
+    	//跑马灯效果必须获取到焦点,否则无法展现效果
+    	 android:focusable="true" 
+        android:focusableInTouchMode="true"
+        //设置一直滚动
+        android:marqueeRepeatLimit="marquee_forever"
+     -->
+ 
+    <!-- 使用自定义控件 -->
+    <com.itcasthd.mobilesafe.view.FousTextView
+         android:text="手机防盗中心已上线，欢迎使用，有疑问请联系管理员"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:padding="1dp"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        ></com.itcasthd.mobilesafe.view.FousTextView>
+<!-- 九宫格 -->
+<!-- 
+android:numColumns="3"  指定列的数量
+android:verticalSpacing="12dp"  指定竖直方向的距离
+ -->
+<GridView
+    android:id="@+id/gv_home"
+    android:layout_width="match_parent"
+    android:numColumns="3"
+    android:verticalSpacing="12dp"
+    android:layout_height="match_parent" >
+</GridView>
+</LinearLayout>

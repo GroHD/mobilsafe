@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 文本框左右抖动的动画 
+android:interpolator= "@anim/cycle_7" 是插补器
+-->
+<translate
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta="0"
+    android:toXDelta="10"
+    android:duration="1000"
+ android:interpolator="@anim/cycle_7"
+    >
+    
+
+</translate>
