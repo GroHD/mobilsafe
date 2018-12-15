@@ -49,4 +49,16 @@ public class ContentValue {
 	 * 是否开启拦截黑名单
 	 * */
 	public static final String BLACKNUMBERCONFIG = "blacknumberconfig";
+	/**
+	 * 是否显示系统进程
+	 * */
+	public static final String SYSTEMPROCESSISSHOW = "systemprocessisshow";
+	/**
+	 * 锁屏清理进程
+	 * */
+	public static final String SYSTEMPROCESSLOCKCLEAR = "systemprocesslockclear";
+	/**
+	 * 是否已设置桌面快捷键
+	 * */
+	public static final String SETINGSHORTCUT = "setingshortcut";
 }

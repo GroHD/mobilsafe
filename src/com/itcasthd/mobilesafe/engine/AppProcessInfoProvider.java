@@ -41,6 +41,17 @@ public class AppProcessInfoProvider {
 			return 0;
 		}
 	}
+	
+	/**
+	 * 杀死一个进程
+	 * 需要一个 android.permission.KILL_BACKGROUND_PROCESSES权限
+	 * @param processInfo   要杀死的进程
+	 */
+	public static void killProcess(Context context,ProcessInfo processInfo) {
+		//1.获取activityManager
+		ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		am.killBackgroundProcesses(processInfo.getPackageName());
+	}
 
 	/**
 	 * 获取可用的内存数

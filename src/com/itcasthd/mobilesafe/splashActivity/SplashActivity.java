@@ -26,6 +26,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -50,7 +51,7 @@ public class SplashActivity extends Activity {
 	Handler mHandler = new Handler() {
 		/**
 		 * 处理消息机制 用来处理从线程中传递回来的数据
-		 * */ 
+		 */
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case UPDATE_CERSION:
@@ -58,7 +59,7 @@ public class SplashActivity extends Activity {
 				String versionName = data.getString("versionName");
 				String versionDes = data.getString("versionDes");
 				String downloadUrl = data.getString("downloadUrl");
-				shouUpdateDialog(versionName,versionDes,downloadUrl);
+				shouUpdateDialog(versionName, versionDes, downloadUrl);
 				// 更新
 				break;
 			case ENTER_HOME:
@@ -77,37 +78,38 @@ public class SplashActivity extends Activity {
 
 	};
 	private RelativeLayout rl_root;
+
 	/**
 	 * 弹出对话框,提示用户更新
-	 * */
-	protected void shouUpdateDialog(String versionName,String  versionDes,final String loadUrl) {
+	 */
+	protected void shouUpdateDialog(String versionName, String versionDes, final String loadUrl) {
 		Builder alert = new AlertDialog.Builder(this);
 		alert.setIcon(R.drawable.update);
 		alert.setTitle("程序有最新版本");
-		alert.setMessage("本次更新如下\r\n   更新版本:"+versionName+"\r\n更新内容:\r\n   "+versionDes);
+		alert.setMessage("本次更新如下\r\n   更新版本:" + versionName + "\r\n更新内容:\r\n   " + versionDes);
 		alert.setPositiveButton("更新", new OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				//下载apk
-			
+				// 下载apk
+
 				System.out.println("更新apk");
 				downloadApk(loadUrl);
-				
+
 			}
 		});
-		//点击取消按钮
+		// 点击取消按钮
 		alert.setNegativeButton("取消更新", new OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				System.out.println("取消更新apk");
-				//取消更新后跳转主界面
+				// 取消更新后跳转主界面
 				enterHome();
 			}
 		});
-		//当点击手机上的后退之后进入主界面,或者没点击取消也没点击更新,则走这个处理方法
+		// 当点击手机上的后退之后进入主界面,或者没点击取消也没点击更新,则走这个处理方法
 		alert.setOnCancelListener(new OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface dialog) {
@@ -118,108 +120,111 @@ public class SplashActivity extends Activity {
 		});
 		alert.show();
 	}
-	
+
 	/**
 	 * 使用XUtils下载apk下载apk,这个需要网络和sd卡的权限
+	 * 
 	 * @param loadUrl
 	 */
 	private void downloadApk(String loadUrl) {
-		//sd卡可用
-		if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+		// sd卡可用
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 			System.out.println(loadUrl);
-			int index = loadUrl.lastIndexOf("/");//拿到最后一个/的位置
-			String apkName = loadUrl.substring(index+1);
-			//拼接文件名  File.separator  是系统分隔符
-			final String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+apkName;
+			int index = loadUrl.lastIndexOf("/");// 拿到最后一个/的位置
+			String apkName = loadUrl.substring(index + 1);
+			// 拼接文件名 File.separator 是系统分隔符
+			final String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+					+ apkName;
 			System.out.println(sdPath);
-			//发送请求,获取下载apk,并且放到指定的位置
+			// 发送请求,获取下载apk,并且放到指定的位置
 			HttpUtils utils = new HttpUtils();
 			/*
-			 * 第一个参数下载的地址
-			 * 第二个参数保存到那个目录下
-			 * 第三个参数是下载数据执行的回调函数
-			 * */
+			 * 第一个参数下载的地址 第二个参数保存到那个目录下 第三个参数是下载数据执行的回调函数
+			 */
 			utils.download(loadUrl, sdPath, new RequestCallBack<File>() {
-				
+
 				@Override
 				public void onSuccess(ResponseInfo<File> responseInfo) {
 					// TODO Auto-generated method stub
-					//下载成功
-					//下载成功(下载过后存放在sd卡中的apk)
+					// 下载成功
+					// 下载成功(下载过后存放在sd卡中的apk)
 					File file = responseInfo.result;
-					Log.i("log","下载成功");
-					//下载成功  提示用户安装
+					Log.i("log", "下载成功");
+					// 下载成功 提示用户安装
 					installApk(file);
 				}
-				
+
 				@Override
 				public void onFailure(HttpException arg0, String arg1) {
 					// TODO Auto-generated method stub
-					//下载失败
-					Log.i("log","下载失败");
-					//下载失败进入主界面
+					// 下载失败
+					Log.i("log", "下载失败");
+					// 下载失败进入主界面
 					enterHome();
 				}
-				//刚刚开始下载的方法
+
+				// 刚刚开始下载的方法
 				@Override
 				public void onStart() {
-					//刚开始下载
-					Log.i("log","刚开始下载");
+					// 刚开始下载
+					Log.i("log", "刚开始下载");
 				}
+
 				/*
-				 * 第一个参数是 下载的总大小
-				 * 第二个参数是 当前的下载位置
-				 * 第三个参数是  是否正在下载
-				 * */
+				 * 第一个参数是 下载的总大小 第二个参数是 当前的下载位置 第三个参数是 是否正在下载
+				 */
 				@Override
 				public void onLoading(long total, long current, boolean isUploading) {
 					// TODO Auto-generated method stub
-					//下载中的
-					Log.i("log","下载中  total:"+total+" current:"+current+" ");
-					
+					// 下载中的
+					Log.i("log", "下载中  total:" + total + " current:" + current + " ");
+
 				}
 			});
-			//发送请求
-			//utils.send(method, url, callBack)
-			
-		}
-		else {
-			//sd卡不可用
+			// 发送请求
+			// utils.send(method, url, callBack)
+
+		} else {
+			// sd卡不可用
 			Toast.makeText(this, "sd卡不可用,请稍后再试!", 1).show();
-			//下载失败进入主界面
+			// 下载失败进入主界面
 			enterHome();
 		}
 	}
-	
+
 	/**
 	 * 安装apk
-	 * @param apkPath  apk 文件路径
+	 * 
+	 * @param apkPath
+	 *            apk 文件路径
 	 */
-	protected void installApk(File  file) {
-		if(file.exists()) {
-			//文件不存在
-			//调用隐士意图安装apk
+	protected void installApk(File file) {
+		if (file.exists()) {
+			// 文件不存在
+			// 调用隐士意图安装apk
 			Intent intent = new Intent("android.intent.action.VIEW");
 			intent.addCategory("android.intent.category.DEFAULT");
-			//文件作为数据源
-		//	intent.setData(Uri.fromFile(file));
-			//设置安装的类型
-		//	intent.setType("application/vnd.android.package-archive");
-			//下面的这个相当于上面的两个
+			// 文件作为数据源
+			// intent.setData(Uri.fromFile(file));
+			// 设置安装的类型
+			// intent.setType("application/vnd.android.package-archive");
+			// 下面的这个相当于上面的两个
 			intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-			//开启界面
-			//startActivity(intent);
-			//开启安装界面的时候返回
+			// 开启界面
+			// startActivity(intent);
+			// 开启安装界面的时候返回
 			startActivityForResult(intent, 0);
 		}
-		//安装应用
+		// 安装应用
 	}
-	//开启安装界面结束后，返回结果调用的方法
+
+	// 开启安装界面结束后，返回结果调用的方法
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		enterHome();
 	}
+
 	/**
 	 * 跳转主界面
 	 */
@@ -242,14 +247,42 @@ public class SplashActivity extends Activity {
 		initUi();
 		// 初始化数据
 		initData();
-		
-		//初始化动画类,淡入
-		AlphaAnimation alphaAnimation = new AlphaAnimation(0,1);
-		//设置执行时长
+		// 创建桌面快捷键
+		initShortcut();
+
+		// 初始化动画类,淡入
+		AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+		// 设置执行时长
 		alphaAnimation.setDuration(1000);
-		//rl_root是根节点的id
+		// rl_root是根节点的id
 		rl_root.setAnimation(alphaAnimation);
-		
+
+	}
+
+	/*
+	 * 创建快捷键
+	 */
+	private void initShortcut() {
+		// 是否已创建快捷键方式
+		boolean setingShortCut = SpUtils.getBoolean(getApplicationContext(), ContentValue.SETINGSHORTCUT, false);
+		if (setingShortCut) {
+			return;
+		}
+		Intent intent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+		// 维护图标
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+				BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher));
+		// 维护名称
+		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "手机卫士");
+		// 点击快捷键跳转到activity
+		// 维护要开启的意图
+		Intent startIntent = new Intent("android.intent.action.HOME");
+		startIntent.addCategory("android.intent.category.DEFAULT");
+		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, startIntent);
+		// 发送广播
+		sendBroadcast(intent);
+		// 设置已创建桌面快捷键
+		SpUtils.putBoolean(getApplicationContext(), ContentValue.SETINGSHORTCUT, true);
 
 	}
 
@@ -268,16 +301,15 @@ public class SplashActivity extends Activity {
 		 * json的内容: 1.最新版本的版本名称 2.更新的版本描述信息 3.服务端的版本号
 		 * 
 		 */
-		//判断是否自动更新
+		// 判断是否自动更新
 		boolean autoUpdate = SpUtils.getBoolean(this, ContentValue.AUTOUPDATE, false);
-		if(autoUpdate) {
+		if (autoUpdate) {
 			getServiceVersionCode();
-		}
-		else {
-			//不自动更新  进入主界面
-			//  4000秒以后进入界面
+		} else {
+			// 不自动更新 进入主界面
+			// 4000秒以后进入界面
 			mHandler.sendEmptyMessageDelayed(ENTER_HOME, 4000);
-			//enterHome();
+			// enterHome();
 		}
 
 	}
@@ -296,7 +328,7 @@ public class SplashActivity extends Activity {
 				Message msg = Message.obtain();
 				long starTime = System.currentTimeMillis();
 				try {
-					
+
 					URL url = new URL("http://192.168.0.5/update.json");
 					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 					// 请求方式
@@ -400,7 +432,7 @@ public class SplashActivity extends Activity {
 	 */
 	public void initUi() {
 		tv = (TextView) findViewById(R.id.tv_version_name);
-		rl_root = (RelativeLayout)findViewById(R.id.rl_root);
+		rl_root = (RelativeLayout) findViewById(R.id.rl_root);
 
 	}
 

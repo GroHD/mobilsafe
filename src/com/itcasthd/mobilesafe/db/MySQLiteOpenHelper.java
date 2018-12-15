@@ -12,7 +12,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO   初始化数据库
+		// TODO 
 		db.execSQL("create table blackNumber(_id integer primary key autoincrement,phone varchar(20),model varchar(5));");
 
 	}

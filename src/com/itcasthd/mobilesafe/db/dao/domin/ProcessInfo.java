@@ -23,7 +23,7 @@ public class ProcessInfo {
 	public void setMemSize(long memSize) {
 		this.memSize = memSize;
 	}
-	public boolean isCheck() {
+	public boolean getCheck() {
 		return isCheck;
 	}
 	public void setCheck(boolean isCheck) {
