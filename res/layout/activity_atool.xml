@@ -7,7 +7,6 @@
         style="@style/TitleStyle"
         android:text="高级工具"
         />
-    
     <TextView 
         android:id="@+id/tv_query_phone_address"
         android:layout_width="match_parent"
@@ -30,5 +29,18 @@
         android:background="@drawable/selector_atool_item_bj"
         android:text="备份短信"
         />
+      
+      <TextView 
+        android:id="@+id/tv_commonnum_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:drawableLeft="@android:drawable/btn_radio"
+        android:background="@drawable/selector_atool_item_bj"
+        android:text="常用号码查询"
+        />
+      
 
 </LinearLayout>

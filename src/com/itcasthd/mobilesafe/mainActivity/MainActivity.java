@@ -60,6 +60,8 @@ public class MainActivity extends Activity {
 	private void initDB() {
 		//1 归属地的数据拷贝
 		initAddressDB("address.db");
+		//2 移动常用号码数据拷贝
+		initAddressDB("commonnum.db");
 	}
 
 	/**

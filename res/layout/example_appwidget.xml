@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:id="@+id/rl_root"
+    android:background="@drawable/btn_green_normal"
+    >
+    <!-- 1.0版本的窗体小布局文件 -->
+<TextView 
+    android:id="@+id/tv_widget_process_count"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+   android:text="运行中程序99个"
+    />
+<TextView 
+    android:id="@+id/tv_widget_memony_size"
+    android:layout_below="@id/tv_widget_process_count"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+   android:text="内存：9999MB/9999GB"
+    />
+<Button 
+    android:id="@+id/btn_clear_memony"
+    android:layout_alignParentRight="true"
+    android:background="@drawable/selector_next__btn_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="清理"
+    />
+</RelativeLayout>

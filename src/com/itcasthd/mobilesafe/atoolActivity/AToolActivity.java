@@ -27,11 +27,30 @@ public class AToolActivity extends Activity {
 		setContentView(R.layout.activity_atool);
 		initUI();
 		initSmsBack();
+		initCommonNumQuery();
+		
 
 	}
-
+	
 	/**
-	 * 被封短信
+	 * 常用号码查询
+	 * 使用ExpandableListView 来实现
+	 * 
+	 */
+	private void initCommonNumQuery(){
+		TextView tv_commonnum_query =(TextView)findViewById(R.id.tv_commonnum_query);
+		tv_commonnum_query.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(),CommonNumQueryAcivity.class));
+				
+			}
+		});
+	}
+	
+	/**
+	 * 备份短信
 	 */
 	public void initSmsBack() {
 		tv_query_phone_address = (TextView) findViewById(R.id.tv_back_SMS);

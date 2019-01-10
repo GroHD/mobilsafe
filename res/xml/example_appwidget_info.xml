@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--小控件宽高-->
+  <!--android:minWidth="40dp"-->
+  <!--android:minHeight="40dp"-->
+  <!--更新时间-->
+  <!--android:updatePeriodMillis="86400000"-->
+  <!--用于指定预览图片。即搜索到widget时，查看到的图片。若没有设置的话，系统为指定一张默认图片。-->
+  <!--android:previewImage="@drawable/widget_flashlight"-->
+  <!--android:resizeMode ： widget可以被拉伸的方向。horizontal表示可以水平拉伸，vertical表示可以竖直拉伸-->
+  <!--android:resizeMode="horizontal|vertical"-->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minHeight="30dp"
+    android:minWidth="200dp"
+    android:initialLayout="@layout/example_appwidget"
+    >
+</appwidget-provider>
