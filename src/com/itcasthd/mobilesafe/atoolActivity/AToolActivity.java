@@ -28,10 +28,27 @@ public class AToolActivity extends Activity {
 		initUI();
 		initSmsBack();
 		initCommonNumQuery();
+		initLockApp();//应用加锁
 		
 
 	}
 	
+	/**
+	 * 应用程序加锁
+	 */
+	private void initLockApp() {
+		// TODO Auto-generated method stub
+		TextView tv_lock_app =(TextView)findViewById(R.id.tv_lock_app);
+		tv_lock_app.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(getApplicationContext(),LockAppActivity.class));
+				
+			}
+		});
+	}
+
 	/**
 	 * 常用号码查询
 	 * 使用ExpandableListView 来实现

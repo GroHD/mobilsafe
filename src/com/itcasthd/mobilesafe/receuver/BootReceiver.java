@@ -8,6 +8,7 @@ import com.itcasthd.mobilesafe.Utils.ContentValue;
 import com.itcasthd.mobilesafe.Utils.SpUtils;
 import com.itcasthd.mobilesafe.service.AddressService;
 import com.itcasthd.mobilesafe.service.BlackNumberService;
+import com.itcasthd.mobilesafe.service.MyNotificationService;
 
 import android.R;
 import android.content.BroadcastReceiver;
@@ -31,15 +32,15 @@ public class BootReceiver extends BroadcastReceiver {
 		// TODO Auto-generated method stub
 		String action = intent.getAction();
 
-		// if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
+		//开启工具栏
+		Intent notifiService = new Intent(context,MyNotificationService.class);
+		//开启服务，用来创建notif
+	 	context.startService(notifiService);
 		
 		checkSIM(context);
 		// 检测是否有开启黑名单
 		checkBlackNumber(context);
 		
-		
-	
-		// }
 	}
 	
 	/**
@@ -71,7 +72,7 @@ public class BootReceiver extends BroadcastReceiver {
 			if (!deviceId.equals(spSimPhoneNum)) {
 				// 4.不一样发短信
 				SmsManager sms = SmsManager.getDefault();
-				String contact = SpUtils.getString(context, ContentValue.CONTACT, "");
+				String contact = SpUtils.getString(context, ContentValue.CONTACT, "110");
 				List<String> strList = sms.divideMessage(
 						"您的手机更换SIM卡,可发送以下代码：【#*location*# 获取手机位置】  【#*alarm*# 播放报警音乐】【#*wipedata*# 删除手机数据(找不回)】【#*lockscreen*# 手机锁屏】");
 				for (int i = 0; i < strList.size(); ++i) {

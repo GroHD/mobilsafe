@@ -4,18 +4,15 @@ import com.itcasthd.mobilesafe.R;
 import com.itcasthd.mobilesafe.Utils.ContentValue;
 import com.itcasthd.mobilesafe.Utils.SpUtils;
 import com.itcasthd.mobilesafe.service.LocationService;
+import com.itcasthd.mobilesafe.service.MyNotificationService;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.telephony.SmsMessage;
-import android.util.Log;
-import android.widget.Toast;
 
 public class SmsReceiver extends BroadcastReceiver {
 
@@ -81,6 +78,10 @@ public class SmsReceiver extends BroadcastReceiver {
 			}
 
 		}
+		
+		
 	}
+
+	
 
 }

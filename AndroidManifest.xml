@@ -136,7 +136,7 @@
         </receiver>
         <!-- 开机启动 -->
         <receiver android:name="com.itcasthd.mobilesafe.receuver.BootReceiver" >
-            <intent-filter android:priority="0x7FFFFFFF" >
+            <intent-filter  >
 
                 <!-- 开机启动 -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -144,7 +144,7 @@
         </receiver>
         <!-- 短信广播 -->
         <receiver android:name="com.itcasthd.mobilesafe.receuver.SmsReceiver" >
-            <intent-filter android:priority="0x7FFFFFFF" >
+            <intent-filter >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
@@ -194,6 +194,7 @@
         <!-- 窗口小部件 -->
         <service android:name="com.itcasthd.mobilesafe.service.UpdateWidgetService" >
         </service>
+        <service android:name="com.itcasthd.mobilesafe.service.MyNotificationService"></service>
     </application>
 
 </manifest>
